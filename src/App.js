@@ -24,8 +24,6 @@ import {
 function App() {
 
 
-
-
 //state for dark mode
 const [mode, setMode] = useState('light');
 
@@ -42,7 +40,7 @@ const [mode, setMode] = useState('light');
       setMode('light')
       document.body.style.backgroundColor = 'white';
       document.body.style.color = 'black';
-
+    
       showAlert("Light Mode Enabled", "success")
 
 
@@ -72,34 +70,21 @@ const [mode, setMode] = useState('light');
 
 
 
-// state for change color
-const [myStyle, setMyStyle] = useState({
 
-  color : 'black',
-  backgroundColor : 'white'
-})
 
 // state for button text
-const [btnTxt, setBtnTxt] = useState("DarkMode")
+
+const [btnTxt, setBtnTxt] = useState("Enable")
 
 const changeMode = ()=>{
 
-if(mode === 'dark'){
-  setMyStyle({
-      color: 'black',
-      backgroundColor : 'white'
-      
-  })
-  setBtnTxt("DarkMode")
-}else{
-  setMyStyle({
-      color : 'white',
-      backgroundColor: 'black',
-      border : '1px solid white',
-      borderRadius : '3px'
-  })
-  setBtnTxt("LightMode")
-}
+    if(mode === 'dark'){
+
+      setBtnTxt("Enable")
+    }else{
+
+      setBtnTxt("Disable")
+    }
 
 
 }
@@ -111,8 +96,10 @@ if(mode === 'dark'){
   return (
 
     // routing means navigating to pages
-    <Router>
-      <Navbar title="TextUtils" about="About Us" mode={mode} changeMode={changeMode} toggleMode= {toggleMode}/>
+    <>
+     <Router>
+      <Navbar title="TextUtils" about="About Us" mode={mode} changeMode={changeMode} btnTxt={btnTxt} toggleMode= {toggleMode}/>
+     
 
         <Alert Alert={alert} />
 
@@ -120,16 +107,17 @@ if(mode === 'dark'){
        
         <Routes>
 
- 
-          <Route exact path='/' element={ <TextForm  heading= "Enter the Text to Analyze" showAlert={showAlert} />} />
+          <Route exact path='/' element={ <TextForm  heading= "Enter the Text to Analyze" mode={mode} showAlert={showAlert} />} />
 
-          <Route exact path='/about' element={<About mode={mode} myStyle={myStyle} />} />
+
+          <Route exact path='/about' element={<About mode={mode} />} />
 
         </Routes>
 
         </div>
-    </Router>
-
+     </Router>
+    
+      </>
 
     
   );

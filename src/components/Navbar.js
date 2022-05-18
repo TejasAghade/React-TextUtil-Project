@@ -6,11 +6,10 @@ import { Link } from 'react-router-dom'
 
 
 export default function Navbar(props) {
-
-  const modeChanging = () =>{
-    props.toggleMode();
-    props.changeMode();
-  }
+function toggle(){
+  props.toggleMode()
+  props.changeMode()
+}
   
   return (
     <>
@@ -33,8 +32,8 @@ export default function Navbar(props) {
         </ul>
        
         <div className={`form-check form-switch text-${props.mode === 'light'?'dark':'light'} `}>
-          <input className="form-check-input" type="checkbox" onClick={modeChanging} role="switch" id="flexSwitchCheckChecked" />
-          <label className="form-check-label"  htmlFor="flexSwitchCheckChecked">Enable Dark Mode</label >
+          <input className="form-check-input" type="checkbox" onClick={toggle} role="switch" id="flexSwitchCheckChecked" />
+          <label className="form-check-label"  htmlFor="flexSwitchCheckChecked">{props.btnTxt} Dark Mode</label >
         </div>
       </div>
     </div>
